@@ -1,0 +1,21 @@
+import { SignInForm } from "@/components/auth/sign-in-form";
+import { redirect } from "next/navigation";
+import { getAuth } from "@/actions/auth";
+
+export default async function SignInPage() {
+    const { session } = await getAuth();
+
+    if (session) {
+        return redirect("/home");
+    }
+
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen pb-12">
+            <h4 className="text-2xl top-6 tracking-widest mb-6">
+                FEATHERWING
+            </h4>
+
+            <SignInForm />
+        </div>
+    );
+};
